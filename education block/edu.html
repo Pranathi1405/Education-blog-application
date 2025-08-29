@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Educational Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: #f4f1ff;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      background-color: #f4f1ff;
+    }
+
+    header h1 {
+      font-size: 24px;
+    }
+
+    .search-bar input {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 250px;
+    }
+
+    .header-buttons {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .header-buttons button {
+      background-color: #937eff;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .blog-listing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 40px;
+    }
+
+    .blog-card {
+      background-color: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .blog-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .blog-card .tag {
+      margin: 16px;
+      display: inline-block;
+      padding: 4px 10px;
+      background-color: #eee3ff;
+      color: #7b57ff;
+      font-size: 12px;
+      border-radius: 8px;
+    }
+
+    .blog-card h3 {
+      margin: 0 16px;
+      font-size: 18px;
+      margin-top: 8px;
+    }
+
+    .blog-card p {
+      margin: 12px 16px 20px;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .profile-container,
+    .create-blog-container {
+      padding: 40px;
+    }
+
+    .profile-info {
+      background-color: white;
+      padding: 20px;
+      border-radius: 16px;
+      margin-bottom: 30px;
+    }
+
+    .logout-btn {
+      margin-top: 20px;
+      background: #ff5e5e;
+      color: white;
+      padding: 10px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .create-blog-container form {
+      background-color: white;
+      padding: 20px;
+      border-radius: 16px;
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .create-blog-container input,
+    .create-blog-container textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .form-buttons button {
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cancel-btn {
+      background: #e0e0e0;
+    }
+
+    .publish-btn {
+      background: #937eff;
+      color: white;
+    }
+
+    .back-btn {
+      margin: 20px 40px;
+      cursor: pointer;
+      color: #937eff;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <h1>Educational Blog</h1>
+  <div class="search-bar">
+    <input type="text" placeholder="Search blogs...">
+  </div>
+  <div class="header-buttons">
+    <button onclick="showPage('profile')">Profile</button>
+    <button onclick="showPage('create')">Create New Blog</button>
+  </div>
+</header>
+
+<!-- BLOG LIST PAGE -->
+<section id="home">
+  <div class="blog-listing">
+    <a href="react-course.html">
+      <div class="blog-card">
+      <img src="images/react.jpg" alt="">
+      <span class="tag">Programming</span>
+      <h3>Getting Started with React Development</h3>
+      <p>Learn the fundamentals of React and start building modern web applications.</p>
+        </div>
+      </a>
+    <a href="machine-learning-basics.html">
+    <div class="blog-card">
+      <img src="images/machine.jpg" alt="">
+      <span class="tag">Data Science</span>
+      <h3>Understanding Machine Learning Basics</h3>
+      <p>Explore the core concepts of machine learning and basic algorithms.</p>
+    </div>
+    </a>
+    <a href="technical-writing.html">
+    <div class="blog-card">
+      <img src="images/writings.jpg" alt="">
+      <span class="tag">Writing</span>
+      <h3>The Art of Technical Writing</h3>
+      <p>Master the skills to create clear and effective technical documentation.</p>
+    </div>
+    </a>
+    <div class="blog-card">
+      <img src="images/ai.jpg" alt="">
+      <span class="tag">Technology</span>
+      <h3>Introduction to Artificial Intelligence</h3>
+      <p>Understand AI basics and its impact across industries.</p>
+    </div>
+    <div class="blog-card">
+      <img src="images/teaching.jpg" alt="">
+      <span class="tag">Education</span>
+      <h3>Effective Teaching Strategies</h3>
+      <p>Engage students using modern, innovative teaching methods.</p>
+    </div>
+    <div class="blog-card">
+      <img src="images/WCAG-2.2.jpg" alt="">
+      <span class="tag">Web Development</span>
+      <h3>Web Accessibility Guidelines</h3>
+      <p>Make your web apps accessible to everyone, including users with disabilities.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROFILE PAGE -->
+<section id="profile" class="hidden">
+  <div class="back-btn" onclick="showPage('home')">← Back to Blogs</div>
+  <div class="profile-container">
+    <div class="profile-info">
+      <h2>Account Information</h2>
+      <p><strong>Name:</strong> John Doe</p>
+      <p><strong>Email:</strong> john@example.com</p>
+      <p><strong>Member since:</strong> January 2024</p>
+      <button class="logout-btn" onclick="alert('Logged out!')">Logout</button>
+    </div>
+    <div class="profile-posts">
+      <h2>My Blog Posts</h2>
+      <p>No blog posts yet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CREATE BLOG PAGE -->
+<section id="create" class="hidden">
+  <div class="back-btn" onclick="showPage('home')">← Back to Blogs</div>
+  <div class="create-blog-container">
+    <form>
+      <h2>Create New Blog Post</h2>
+      <input type="text" placeholder="Enter blog title" required />
+      <input type="text" placeholder="e.g., Programming, Data Science" required />
+      <input type="text" placeholder="Enter image URL" />
+      <textarea rows="6" placeholder="Write your blog content here..." required></textarea>
+      <div class="form-buttons">
+        <button type="button" class="cancel-btn" onclick="showPage('home')">Cancel</button>
+        <button type="submit" class="publish-btn">Publish Blog</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  function showPage(page) {
+    document.getElementById('home').classList.add('hidden');
+    document.getElementById('profile').classList.add('hidden');
+    document.getElementById('create').classList.add('hidden');
+    document.getElementById(page).classList.remove('hidden');
+  }
+</script>
+
+</body>
+</html>

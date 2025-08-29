@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Educational Blog</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9fc;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+    }
+    header h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+    header p {
+      color: #666;
+      font-size: 1.1em;
+    }
+    .buttons {
+      margin: 20px;
+      text-align: center;
+    }
+    .buttons button {
+      background-color: #7869f6;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    .buttons button:nth-child(2) {
+      background-color: white;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 40px 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      width: 300px;
+      max-width: 100%;
+    }
+    .card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 20px;
+    }
+    .tag {
+      background-color: #e5d9ff;
+      color: #5a4db2;
+      font-size: 0.75em;
+      padding: 5px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+    .card h3 {
+      margin: 10px 0;
+    }
+    .card p {
+      font-size: 0.95em;
+      color: #666;
+    }
+
+    /* Modal form styles */
+    .overlay-form {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100vw;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .form-container {
+      background: #f6f3ff;
+      padding: 40px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .tabs button {
+      flex: 1;
+      padding: 10px;
+      background: white;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .tabs button.active {
+      background: #eee8ff;
+    }
+
+    form {
+      display: none;
+    }
+
+    form.active {
+      display: block;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 500;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      outline: none;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #a285f3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: #8b6de6;
+    }
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      color: #666;
+      font-size: 1.5em;
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Educational Blog</h1>
+    <p>Discover insightful articles on programming, data science, and technical writing.<br/>
+    Learn from experts and share your knowledge with the community.</p>
+  </header>
+
+  <div class="buttons">
+    <button onclick="openForm('login')">Sign In</button>
+    <button onclick="openForm('register')">Create Account</button>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <img src="images/react.jpg" alt="React Code" />
+      <div class="card-content">
+        <div class="tag">Programming</div>
+        <h3>Getting Started with React Development</h3>
+        <p>Learn the fundamentals of React and start building modern web applications with this comprehensive guide.</p>
+      </div>
+
+    </div>
+    <div class="card">
+      <img src="images/machine.jpg" alt="Machine Learning" />
+      <div class="card-content">
+        <div class="tag">Data Science</div>
+        <h3>Understanding Machine Learning Basics</h3>
+        <p>Explore the core concepts of machine learning and discover how to implement basic algorithms in your projects.</p>
+      </div>
+    </div>
+    <div class="card">
+      <img src="images/writings.jpg" alt="Technical Writing" />
+      <div class="card-content">
+        <div class="tag">Writing</div>
+        <h3>The Art of Technical Writing</h3>
+        <p>Master the skills needed to create clear, concise, and effective technical documentation for various audiences.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay Form Container -->
+  <div class="overlay-form" id="overlayForm">
+    <div class="form-container">
+      <button class="close-btn" onclick="closeForm()">×</button>
+      <h2>Educational Blog</h2>
+      <p>Share your knowledge with the world</p>
+
+      <div class="tabs">
+        <button class="tab-button active" onclick="showForm('login')">Login</button>
+        <button class="tab-button" onclick="showForm('register')">Register</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="active">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" required>
+
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password" required>
+
+        <button class="submit-btn">Login</button>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm">
+        <label for="regName">Name</label>
+        <input type="text" id="regName" placeholder="Enter your name" required>
+
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" placeholder="Enter your email" required>
+
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" placeholder="Choose a password" required>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+
+        <button class="submit-btn">Create Account</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+  function openForm(type) {
+    document.getElementById('overlayForm').style.display = 'flex';
+    showForm(type);
+  }
+
+  function closeForm() {
+    document.getElementById('overlayForm').style.display = 'none';
+  }
+
+  function showForm(formType) {
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const buttons = document.querySelectorAll('.tab-button');
+
+    if (formType === 'login') {
+      loginForm.classList.add('active');
+      registerForm.classList.remove('active');
+      buttons[0].classList.add('active');
+      buttons[1].classList.remove('active');
+    } else {
+      loginForm.classList.remove('active');
+      registerForm.classList.add('active');
+      buttons[0].classList.remove('active');
+      buttons[1].classList.add('active');
+    }
+  }
+
+  // ✅ Handle login submit
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    // Optionally validate credentials here...
+
+    // ✅ Redirect to edu.html after login
+    window.location.href = 'edu.html';
+  });
+
+  // ✅ Handle register submit
+  document.getElementById('registerForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    // Optionally validate fields or save to localStorage/server...
+
+    // ✅ Switch to login form after registration
+    alert("Account created! Please login.");
+    showForm('login');
+  });
+</script>
+
+</body>
+</html>
